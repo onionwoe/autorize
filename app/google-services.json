@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "216445323122",
+    "project_id": "autorize-98d6b",
+    "storage_bucket": "autorize-98d6b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216445323122:android:f273f000007082baebffeb",
+        "android_client_info": {
+          "package_name": "com.example.autorize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216445323122-ndc5k4145ol6j03jl423plrqqearipjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaMc3Fw8BSUfYxQHlEud53kLEjER72zSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216445323122-ndc5k4145ol6j03jl423plrqqearipjt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
