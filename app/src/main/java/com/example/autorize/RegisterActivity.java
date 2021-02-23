@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -30,19 +31,42 @@ public class RegisterActivity extends AppCompatActivity {
     static final int RC_SIGN_IN = 1;//request код который проверяем откуда пришел результат
     private FirebaseAuth mAuth;////создаем точку входа в Firebase Authentication
     private GoogleSignInClient googleSignInClient;//создаем обьект, чтобы использовать клиент для входа в Google
+    private Button signInBtn;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        createRequest();
+        setupViews();
+        setupListener();
+
+    }
+
+    private void setupListener() {
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {//обработка нажатия
+                signIn();//вызов метода для входа в аккаунт
+            }
+        });
+    }
+
+    private void setupViews() {
+        signInBtn = findViewById(R.id.signIn_btn);
+    }
+
+    private void createRequest() {
         //Настройка входа для запроса идентификатора пользователя, адреса электронной почты. ID и базовый профиль включены в DEFAULT_SIGN_IN
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))//
-                .requestEmail()
+                .requestEmail()//показывает электронные почты
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, gso);//чтобы инпортировать настройки, инициализируем наш клиент входа в Google
-        mAuth = FirebaseAuth.getInstance();//инициализируем нашу точку входа
     }
 
     private void signIn() {
@@ -50,14 +74,9 @@ public class RegisterActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    public void onClick(View view) {//обработка нажатия
-        signIn();//вызов метода для входа в аккаунт
-    }
-
-
     //Результат, возвращенный при запуске Intent из GoogleSignInClient.getSignInIntent (...);
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN) {//проверка возвращаемого результата
@@ -65,26 +84,31 @@ public class RegisterActivity extends AppCompatActivity {
             if (task.isSuccessful()){//если все успешно
                 try {
                     // Вход в Google выполнен успешно, аутентифицируйтесь с помощью Firebase
-                    GoogleSignInAccount account = task.getResult(ApiException.class);//возвращаем информацию о пользователе, выполнившем вход в это приложение
-                    firebaseAuthWithGoogle(account.getIdToken());//получаем токен аккаунта
+                    GoogleSignInAccount account = task.getResult(ApiException.class);//возвращаем информацию о пользователе, выполнившем вход в это приложение;
+                    firebaseGoogleAuth(account);
                 } catch (ApiException e) {
-
+                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    firebaseGoogleAuth(null);
                 }
             }
 
         }
     }
 
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+    private void firebaseGoogleAuth(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){//Успешный вход, обновите пользовательский интерфейс, указав информацию о зарегистрированном пользователе
+
                             Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
+                        }
+                        else {
+                            Toast.makeText(RegisterActivity.this, "Sorry", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

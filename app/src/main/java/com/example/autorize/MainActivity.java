@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth; //создаем точку входа в Firebase Authentication
     private FirebaseUser user; //создаем текущего пользовтателя
+    private GoogleSignInAccount googleSignInAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

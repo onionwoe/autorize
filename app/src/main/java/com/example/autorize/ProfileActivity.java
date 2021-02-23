@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,10 +32,16 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        id.setText(user.getUid());//получаем идентификатор пользователя
-        name.setText(user.getDisplayName());//получаем имя пользователя
-        email.setText(user.getEmail());//получаем email пользователя
-        Glide.with(this).load(user.getPhotoUrl()).into(profileImage);////получаем фото пользователя
+
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if (signInAccount != null){
+            id.setText(user.getUid());//получаем идентификатор пользователя
+            name.setText(user.getDisplayName());//получаем имя пользователя
+            email.setText(user.getEmail());//получаем email пользователя
+            Glide.with(this).load(user.getPhotoUrl()).into(profileImage);////получаем фото пользователя
+        }
+
+
     }
 
     private void initialize() {//инициализируем наши созданные обьекты

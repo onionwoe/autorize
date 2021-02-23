@@ -19,6 +19,7 @@
         />
 
     <Button
+        android:id="@+id/signIn_btn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="20dp"
@@ -29,7 +30,6 @@
         android:text="Sign In With Google"
         android:textAllCaps="false"
         android:textSize="16sp"
-        android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
