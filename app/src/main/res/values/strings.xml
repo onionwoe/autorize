@@ -2,4 +2,6 @@
     <string name="app_name">autorize</string>
     <string name="example">Example</string>
     <string name="sign_out">Выйти</string>
+    <string name="facebook_app_id">252008636400607</string>
+    <string name="fb_login_protocol_scheme">fb252008636400607</string>
 </resources>
