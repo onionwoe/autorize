@@ -16,6 +16,7 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -35,51 +36,60 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
+import java.util.Arrays;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    CallbackManager mCallbackManager;
-    private LoginButton loginButton;
+    CallbackManager mCallbackManager;//создаем диспетчер обратного вызова
 
     static final int RC_SIGN_IN = 1;//request код который проверяем откуда пришел результат
     private FirebaseAuth mAuth;////создаем точку входа в Firebase Authentication
     private GoogleSignInClient googleSignInClient;//создаем обьект, чтобы использовать клиент для входа в Google
-    private Button signInBtn;
-    private FirebaseUser user;
+    private Button signInBtn, customFButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        //Инициализация Facebook SDK
-        FacebookSdk.sdkInitialize(RegisterActivity.this);
-        // Initialize Facebook Login button
-        mCallbackManager = CallbackManager.Factory.create();
-        loginButton = findViewById(R.id.facebook_btn);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                handleFacebookAccessToken(loginResult.getAccessToken());
-            }
-
-            @Override
-            public void onCancel() {
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-            }
-        });
-
-
 
         mAuth = FirebaseAuth.getInstance();
 
+        initializeFacebook();
         createRequest();
         setupViews();
         setupListener();
 
+    }
+
+    private void initializeFacebook() {
+
+        FacebookSdk.sdkInitialize(RegisterActivity.this);//Инициализация Facebook SDK
+        mCallbackManager = CallbackManager.Factory.create();//вызовим этот метод для обработки токена для входа
+        customFButton = findViewById(R.id.customFButton);//инициализируем кнопку
+        customFButton.setOnClickListener(new View.OnClickListener() {//обработчик нажатия
+            @Override
+            public void onClick(View view) {
+                LoginManager.getInstance().logInWithReadPermissions(RegisterActivity.this,
+                        Arrays.asList("email", "public_profile"));//получаем доступ к данным пользователя из Facebook
+                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {//чтобы отреагировать на результат входа, нужно зарегистрировать обравтный вызов
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+
+                    }
+                });
+            }
+        });
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -89,13 +99,11 @@ public class RegisterActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        if (task.isSuccessful()) {//если все успешно, то открывается MainActivity
+                            Intent intent = new Intent(RegisterActivity.this, ProfileActivity.class);
                             startActivity(intent);
                             finish();
                         } else {
-                            // If sign in fails, display a message to the user.
                             Toast.makeText(RegisterActivity.this, "Sorry", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -134,6 +142,8 @@ public class RegisterActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);//чтобы передать результаты входа в LoginManager через callbackManager.
+
         if (requestCode == RC_SIGN_IN) {//проверка возвращаемого результата
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             if (task.isSuccessful()){//если все успешно
@@ -158,7 +168,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){//Успешный вход, обновите пользовательский интерфейс, указав информацию о зарегистрированном пользователе
 
-                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                            Intent intent = new Intent(RegisterActivity.this, ProfileActivity.class);
                             startActivity(intent);
                             finish();
                         }
@@ -167,5 +177,10 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void onClick(View view) {
+        startActivity(new Intent(this, PhoneActivity.class));
+        finish();
     }
 }

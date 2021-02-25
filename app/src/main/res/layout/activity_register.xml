@@ -32,16 +32,36 @@
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/welcome_imageView" />
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/facebook_btn"
+    <Button
+        android:id="@+id/customFButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="20dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp"
-        app:layout_constraintTop_toBottomOf="@id/signIn_btn"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:background="@drawable/custom_fb_button"
+        android:drawableStart="@drawable/facebook"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Sign In With Facebook"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/signIn_btn"/>
+
+    <Button
+        android:id="@+id/customPhoneButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/custom_phone_button"
+        android:drawableStart="@drawable/phone"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Sign In With Phone"
+        android:onClick="onClick"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/customFButton"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
