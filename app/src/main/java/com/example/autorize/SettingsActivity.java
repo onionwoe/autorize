@@ -82,12 +82,12 @@ public class SettingsActivity extends AppCompatActivity {
             userRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).hasChild("image")){//получаем пользователя и проверяем его фотографию
+                    //if (snapshot.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).hasChild("image")){//получаем пользователя и проверяем его фотографию
                         saveInfoOnlyWithoutImage();//вызов метода без фотографии пользователя
-                    }
-                    else {
-                        Toast.makeText(SettingsActivity.this, "Please Select Image", Toast.LENGTH_SHORT).show();
-                    }
+                    //}
+                    //else {
+                        //Toast.makeText(SettingsActivity.this, "Please Select Image", Toast.LENGTH_SHORT).show();
+                    //}
                 }
 
                 @Override
@@ -96,12 +96,12 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
         }
-        else if (getUserName.equals("")){//проверяем на пустоту Edit Text
-            Toast.makeText(this, "User Name is mandatory", Toast.LENGTH_SHORT).show();
-        }
-        else if (getEmailName.equals("")){//проверяем на пустоту Edit Text
-            Toast.makeText(this, "User Email is mandatory", Toast.LENGTH_SHORT).show();
-        }
+//        else if (getUserName.equals("")){//проверяем на пустоту Edit Text
+//            Toast.makeText(this, "User Name is mandatory", Toast.LENGTH_SHORT).show();
+//        }
+//        else if (getEmailName.equals("")){//проверяем на пустоту Edit Text
+//            Toast.makeText(this, "User Email is mandatory", Toast.LENGTH_SHORT).show();
+//        }
         else {//если пользователь зарегался с фотографией
 
             //запускаем загрузочное окно
@@ -157,13 +157,13 @@ public class SettingsActivity extends AppCompatActivity {
 
 
 
-        if (getUserName.equals("")){//проверяем на пустоту Edit Text
-            Toast.makeText(this, "User Name is mandatory", Toast.LENGTH_SHORT).show();
-        }
-        else if (getEmailName.equals("")){//проверяем на пустоту Edit Text
-            Toast.makeText(this, "User Email is mandatory", Toast.LENGTH_SHORT).show();
-        }
-        else {//если пользователь зарегался без фотография
+//        if (getUserName.equals("")){//проверяем на пустоту Edit Text
+//            Toast.makeText(this, "User Name is mandatory", Toast.LENGTH_SHORT).show();
+//        }
+//        else if (getEmailName.equals("")){//проверяем на пустоту Edit Text
+//            Toast.makeText(this, "User Email is mandatory", Toast.LENGTH_SHORT).show();
+//        }
+//        else {//если пользователь зарегался без фотография
 
             //запускаем загрузочное окно
             progressDialog.setTitle("Account Settings");
@@ -186,9 +186,6 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }
             });
-        }
-
-
     }
 
     private void setupViews() {

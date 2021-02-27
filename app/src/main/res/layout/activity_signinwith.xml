@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignInWithActivity">
+
+    <ImageView
+        android:id="@+id/welcome_imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/ic_welcome"
+        />
+
+    <Button
+        android:id="@+id/signIn_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:background="#fff"
+        android:drawableStart="@drawable/google"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Sign In With Google"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/welcome_imageView" />
+
+    <Button
+        android:id="@+id/customFButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/custom_fb_button"
+        android:drawableStart="@drawable/facebook"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Sign In With Facebook"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/signIn_btn"/>
+
+    <Button
+        android:id="@+id/customPhoneButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/custom_phone_button"
+        android:drawableStart="@drawable/phone"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Sign In With Phone"
+        android:onClick="onClick"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/customFButton"/>
+
+    <Button
+        android:id="@+id/customEmailButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/custom_email_button"
+        android:drawableTint="@android:color/white"
+        android:drawableStart="@drawable/email"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Sign In With Email"
+        android:onClick="onClickEmail"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        app:layout_constraintTop_toBottomOf="@id/customPhoneButton"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

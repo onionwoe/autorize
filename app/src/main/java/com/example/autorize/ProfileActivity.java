@@ -37,6 +37,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView id, name, email, phone;//создаем наши TextView
     private CircleImageView profileImage;//создаем CircleImageView
     private DatabaseReference userRef;
+    String images;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,21 @@ public class ProfileActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()){
                             String uid = snapshot.child("uid").getValue().toString();//сохраням uid пользователя в переменную
-                            String images  = snapshot.child("image").getValue().toString();//сохраням фотографию пользователя в переменную
+
+                            try {
+                                images  = snapshot.child("image").getValue().toString();//сохраням фотографию пользователя в переменную
+                            }
+                            catch (NullPointerException e){
+
+                            }
+
+                            if (images != null){
+                                Glide.with(ProfileActivity.this).load(images).into(profileImage);////получаем фото пользователя
+                            }
+                            else if (images == null){
+                                Glide.with(ProfileActivity.this).load(R.drawable.profile_image).into(profileImage);
+                            }
+
                             String names  = snapshot.child("name").getValue().toString();//сохраням имя пользователя в переменную
                             String emails  = snapshot.child("email").getValue().toString();//сохраням email пользователя в переменную
                             String phones = user.getPhoneNumber();//получаем номер телефона
@@ -67,7 +82,6 @@ public class ProfileActivity extends AppCompatActivity {
                             name.setText(names);//получаем имя пользователя
                             email.setText(emails);//получаем email пользователя
                             phone.setText(phones);//получаем email пользователя
-                            Glide.with(ProfileActivity.this).load(images).placeholder(R.drawable.profile_image).into(profileImage);////получаем фото пользователя
                         }
                     }
 

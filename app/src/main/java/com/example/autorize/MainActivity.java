@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkUser() {
         if (user == null){// Если пользователь еще не зарегистрировался
-            Intent signInIntent = new Intent(this, RegisterActivity.class);
+            Intent signInIntent = new Intent(this, SignInWithActivity.class);
             startActivity(signInIntent);//то перекидываем его в окно регистрации
             finish();//закрытия MainActivity
         }
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.logout_menu://если нажата Logout, то выполняется этот блок кода
                 mAuth.signOut();//Выключает текущего вошедшего пользователя
                 LoginManager.getInstance().logOut();
-                startActivity(new Intent(this, RegisterActivity.class));//при нажатии происходит перенаправление в RegisterActivity
+                startActivity(new Intent(this, SignInWithActivity.class));//при нажатии происходит перенаправление в SignInWithActivity
                 finish();
                 return true;//возвращаем истину потому что этот метод возвращает тип данных boolean
             default://если ничего не совпало простовыполняется по умолчанию
