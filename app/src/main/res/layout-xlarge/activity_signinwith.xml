@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Вас пригласил:"
+            android:textSize="40sp"
             android:layout_marginLeft="20dp"/>
 
         <TextView
@@ -29,6 +30,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="ID"
+            android:textSize="40sp"
             android:layout_below="@id/sender"
             />
 
@@ -39,7 +41,7 @@
             android:layout_marginTop="4dp"
             android:textColor="@android:color/black"
             android:text="ID"
-            android:textSize="20sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
@@ -51,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:text="Name"
+            android:textSize="40sp"
             android:layout_marginStart="20dp"
             android:layout_alignParentStart="true"
             android:layout_below="@id/id_sender" />
@@ -63,7 +66,7 @@
             android:layout_marginStart="20dp"
             android:textColor="@android:color/black"
             android:text="Name"
-            android:textSize="20sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             android:layout_alignParentStart="true"
             android:layout_below="@id/name" />
@@ -75,6 +78,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginStart="20dp"
             android:text="GUID"
+            android:textSize="40sp"
             android:layout_alignParentStart="true"
             android:layout_below="@id/name_sender" />
 
@@ -86,7 +90,7 @@
             android:layout_marginStart="20dp"
             android:textColor="@android:color/black"
             android:text="GUID"
-            android:textSize="20sp"
+            android:textSize="40sp"
             android:textStyle="bold"
             android:layout_alignParentStart="true"
             android:layout_below="@id/guid" />
@@ -97,13 +101,13 @@
         android:id="@+id/main_relativelayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         >
 
         <ImageView
             android:id="@+id/welcome_imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:background="@drawable/ic_welcome"
             android:layout_centerHorizontal="true"
 
@@ -122,7 +126,7 @@
             android:paddingEnd="40dp"
             android:text="Sign In With Google"
             android:textAllCaps="false"
-            android:textSize="16sp"
+            android:textSize="40sp"
             android:layout_below="@id/welcome_imageView" />
 
         <Button
@@ -138,7 +142,7 @@
             android:paddingEnd="40dp"
             android:text="Sign In With Facebook"
             android:textAllCaps="false"
-            android:textSize="16sp"
+            android:textSize="40sp"
             android:textColor="@android:color/white"
             android:layout_below="@id/signIn_btn"/>
 
@@ -156,7 +160,7 @@
             android:text="Sign In With Phone"
             android:onClick="onClick"
             android:textAllCaps="false"
-            android:textSize="16sp"
+            android:textSize="40sp"
             android:textColor="@android:color/white"
             android:layout_below="@id/customFButton"/>
 
@@ -175,7 +179,7 @@
             android:text="Sign In With Email"
             android:onClick="onClickEmail"
             android:textAllCaps="false"
-            android:textSize="16sp"
+            android:textSize="40sp"
             android:textColor="@android:color/white"
             android:layout_below="@id/customPhoneButton"/>
 

@@ -5,9 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -22,15 +26,22 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.facebook.FacebookSdk;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 
 public class SignInWithActivity extends AppCompatActivity {
 
@@ -38,22 +49,69 @@ public class SignInWithActivity extends AppCompatActivity {
 
     static final int RC_SIGN_IN = 1;//request код который проверяем откуда пришел результат
     private FirebaseAuth mAuth;////создаем точку входа в Firebase Authentication
+    private FirebaseUser user;
     private GoogleSignInClient googleSignInClient;//создаем обьект, чтобы использовать клиент для входа в Google
     private Button signInBtn, customFButton;
+
+    private String TAG = "SIGN  _ACTIVITY";
+    private RelativeLayout relativeLayout, main_relativelayout;
+    private TextView idTV, nameTV, emailTV, guidTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signinwith);
 
-
         mAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        getDataLink();
+
+
 
         initializeFacebook();
         createRequest();
         setupViews();
         setupListener();
 
+    }
+
+    private void getDataLink() {
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(getIntent())//получаем ссылку
+                .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
+                    @Override
+                    public void onSuccess(PendingDynamicLinkData pendingDynamicLinkData) {
+                        Uri deepLink = null;
+                        if (pendingDynamicLinkData != null){//если ссылка получена
+                            deepLink = pendingDynamicLinkData.getLink();//сохраняем ссылку
+
+                            if (deepLink != null){//если ссылка сохранена
+
+                                try {
+                                    relativeLayout.setVisibility(View.VISIBLE);//делаем окно видимым
+                                    main_relativelayout.setVisibility(View.GONE);//делаем окно не видимым
+                                    nameTV.setText(deepLink.getQueryParameter("user_name"));//выводим на экран данные через ключ
+                                    idTV.setText(deepLink.getQueryParameter("user_id"));//выводим на экран данные через ключ
+                                    guidTV.setText(deepLink.getQueryParameter("user_guid"));//выводим на экран данные через ключ
+                                }
+                                catch (NullPointerException e){
+                                    e.printStackTrace();
+                                }
+                            }
+
+
+
+                            Log.e(TAG, "my referlink " + deepLink.toString());
+                        }
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
     }
 
     private void initializeFacebook() {
@@ -115,6 +173,13 @@ public class SignInWithActivity extends AppCompatActivity {
 
     private void setupViews() {
         signInBtn = findViewById(R.id.signIn_btn);
+        nameTV =  findViewById(R.id.name_sender);
+        guidTV = findViewById(R.id.guid_sender);
+        idTV = findViewById(R.id.id_sender);
+        relativeLayout = findViewById(R.id.relativeLayout);
+        main_relativelayout = findViewById(R.id.main_relativelayout);
+
+
     }
 
     private void createRequest() {

@@ -29,9 +29,7 @@
         android:drawableTint="@android:color/white"
         android:backgroundTint="@android:color/white"
         android:layout_below="@id/settings_profile_img"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_margin="20dp"/>
 
     <EditText
         android:id="@+id/userEmail"
@@ -45,17 +43,13 @@
         android:drawableTint="@android:color/white"
         android:backgroundTint="@android:color/white"
         android:layout_below="@id/userName"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_margin="20dp"/>
 
     <Button
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_margin="30dp"
         android:text="Save"
         android:textColor="@android:color/black"
         android:layout_below="@id/userEmail"/>

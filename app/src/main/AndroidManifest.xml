@@ -3,6 +3,7 @@
     package="com.example.autorize">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -11,26 +12,64 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegisterActivity"
-            android:label="Register">
+        <activity android:name=".ShareActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="example.com"
+                    android:scheme="http" />
+                <data
+                    android:host="example.com"
+                    android:scheme="https" />
+            </intent-filter>
+
         </activity>
-        <activity android:name=".LoginActivity"
-            android:label="Login"/>
-        <activity android:name=".SettingsActivity"
-            android:label="Settings"/>
-        <activity android:name=".PhoneActivity"
-            android:label="Phone"/>
-        <activity android:name=".ProfileActivity"
-            android:label="Profile"/>
-        <activity android:name=".SignInWithActivity"
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Register"/>
+        <activity
+            android:name=".LoginActivity"
+            android:label="Login" />
+        <activity
+            android:name=".SettingsActivity"
+            android:label="Settings" />
+        <activity
+            android:name=".PhoneActivity"
+            android:label="Phone" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Profile" />
+        <activity
+            android:name=".SignInWithActivity"
             android:label="Sign in">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="example.com"
+                    android:scheme="http" />
+                <data
+                    android:host="example.com"
+                    android:scheme="https" />
+            </intent-filter>
+
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity">
+        </activity>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

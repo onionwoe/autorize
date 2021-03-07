@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="200dp">
+        android:layout_marginTop="20dp">
     </TextView>
 
 
@@ -36,7 +36,7 @@
                 android:text="Phone Number:"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,6 +47,7 @@
                     android:id="@+id/ccp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:ccp_textSize="30sp"
                     android:background="@android:color/white"
                     app:ccp_defaultNameCode="RU" />
 
@@ -55,6 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:hint="Number...."
+                    android:textSize="30sp"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/darker_gray"
                     android:inputType="phone"
@@ -91,7 +93,7 @@
         android:text="Continue"
         android:textAllCaps="false"
         android:layout_marginTop="6dp"
-        android:textSize="15dp"
+        android:textSize="30sp"
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"/>
 

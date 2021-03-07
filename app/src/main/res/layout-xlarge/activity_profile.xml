@@ -8,9 +8,9 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/profile_image"
@@ -22,8 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         android:text="ID"
+        android:textSize="30sp"
         android:layout_alignParentStart="true"
         android:layout_below="@id/profile_image" />
 
@@ -34,7 +35,7 @@
         android:layout_marginTop="4dp"
         android:textColor="@android:color/black"
         android:text="ID"
-        android:textSize="18sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:layout_alignParentStart="true"
         android:layout_marginStart="40dp"
@@ -44,7 +45,7 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="Name"
         android:layout_marginStart="40dp"
         android:layout_alignParentStart="true"
@@ -58,7 +59,7 @@
         android:layout_marginStart="40dp"
         android:textColor="@android:color/black"
         android:text="Name"
-        android:textSize="18sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:layout_alignParentStart="true"
         android:layout_below="@id/name" />
@@ -67,9 +68,10 @@
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="40dp"
         android:text="Email"
+        android:textSize="30sp"
         android:layout_alignParentStart="true"
         android:layout_below="@id/name_txt" />
 
@@ -81,7 +83,7 @@
         android:layout_marginStart="40dp"
         android:textColor="@android:color/black"
         android:text="Email"
-        android:textSize="18sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:layout_alignParentStart="true"
         android:layout_below="@id/email" />
@@ -90,7 +92,7 @@
         android:id="@+id/phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="40dp"
         android:text="Phone number"
         android:layout_alignParentStart="true"
@@ -104,7 +106,7 @@
         android:layout_marginStart="40dp"
         android:textColor="@android:color/black"
         android:text="Phone"
-        android:textSize="18sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:layout_below="@id/phone" />
 
@@ -113,6 +115,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Continue"
+        android:textSize="30sp"
         android:textAllCaps="false"
         android:onClick="onClick"
         android:textColor="@android:color/white"
